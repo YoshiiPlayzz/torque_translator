@@ -2,9 +2,8 @@
 This Docker container is used for "translating" the logs that are send via torque to this server to an api call to your HomeAssistant instance.
 You can use this container if you haven't have an ssl certificate for your HomeAssistant instance.
 # Example HomeAssitant config
-```
+```yaml
 ... 
-
 sensor:
   ...
   - platform: torque
