@@ -13,7 +13,7 @@ class S(BaseHTTPRequestHandler):
         
         self._set_response()
         path = str(self.path)
-        
+    
         e_url = os.environ['URL']
         email = os.environ['EMAIL']
         bearer = os.environ['BEARER']
@@ -29,15 +29,21 @@ class S(BaseHTTPRequestHandler):
 
 
 def run(server_class=HTTPServer, handler_class=S, port=8081):
-
+    
     logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     logging.info('Starting httpd...\n')
+    
     if not ("URL" in os.environ or "EMAIL" in os.environ or "BEARER" in os.environ):
         logging.info("Missing environment variables!\nStopping server")
         httpd.server_close()
-
+    else:
+        e_url = os.environ['URL']
+        email = os.environ['EMAIL']
+        bearer = os.environ['BEARER']
+        logging.info("Environment variables\nURL: " + e_url + "\nEMAIL: " +email + "\nBEARER: " + bearer)
+    
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
